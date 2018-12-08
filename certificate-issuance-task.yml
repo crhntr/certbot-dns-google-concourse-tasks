@@ -41,6 +41,7 @@ run:
 
     certbot certonly $DEBUG  \
       --dns-google \
+      $DEBUG \
       --dns-google-credentials $CREDENTIALS \
       --dns-google-propagation-seconds $PROPAGATION_SECONDS \
       -d $DOMAINS
