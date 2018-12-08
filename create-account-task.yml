@@ -27,4 +27,4 @@ run:
       $DEBUG  $AGREE_TOS \
       --email $EMAIL
 
-    cp -R /etc/letsencrypt letsencrypt
+    cp --archive /etc/letsencrypt letsencrypt

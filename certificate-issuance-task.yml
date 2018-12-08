@@ -37,10 +37,12 @@ run:
       DEBUG=""
     fi
 
+    cp --archive letsencrypt /etc/letsencrypt
+
     certbot certonly $DEBUG  \
       --dns-google \
       --dns-google-credentials $CREDENTIALS \
       --dns-google-propagation-seconds $PROPAGATION_SECONDS \
       -d $DOMAINS
 
-    cp -R /etc/letsencrypt letsencrypt
+    cp --archive /etc/letsencrypt letsencrypt
