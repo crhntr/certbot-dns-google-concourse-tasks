@@ -7,6 +7,12 @@ image_resource:
     repository: certbot/dns-google
     version: latest
 
+outputs:
+  - name: letsencrypt
+
+inputs:
+  - name: letsencrypt
+
 params:
 
   DEBUG: # --debug
@@ -19,9 +25,6 @@ params:
 
   DOMAINS:
   # REQUIRED
-
-outputs:
-  - name: letsencrypt
 
 run:
   path: sh
