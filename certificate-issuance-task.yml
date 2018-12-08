@@ -1,0 +1,46 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: certbot/dns-google
+    version: latest
+
+params:
+
+  DEBUG: # --debug
+
+  CREDENTIALS:
+  # REQUIRED
+
+  PROPAGATION_SECONDS:
+  # REQUIRED
+
+  DOMAINS:
+  # REQUIRED
+
+outputs:
+  - name: letsencrypt
+
+run:
+  path: sh
+  args:
+  - "-c"
+  - |
+    set -eux
+    certbot --version
+
+    if [ "$DEBUG" = true ] ; then
+      DEBUG="--debug"
+    else
+      DEBUG=""
+    fi
+
+    certbot certonly $DEBUG  \
+      --dns-google \
+      --dns-google-credentials $CREDENTIALS \
+      --dns-google-propagation-seconds $PROPAGATION_SECONDS \
+      -d $DOMAINS
+
+    cp -R /etc/letsencrypt letsencrypt
