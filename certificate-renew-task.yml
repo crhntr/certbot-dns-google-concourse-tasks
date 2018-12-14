@@ -20,6 +20,9 @@ params:
   DOMAINS:
   # REQUIRED
 
+  DOMAINS:
+  # REQUIRED
+
   DEBUG: # --debug
 
   PROPAGATION_SECONDS: 120
@@ -41,7 +44,11 @@ run:
 
     cp --archive letsencrypt /etc/letsencrypt
 
-    certbot renew $DEBUG \
+    certbot renew $DEBUG  \
+      --dns-google \
+      --dns-google-credentials $CREDENTIALS \
+      --dns-google-propagation-seconds $PROPAGATION_SECONDS \
+
       -d $DOMAINS
 
     cp --archive /etc/letsencrypt letsencrypt
